@@ -1,3 +1,18 @@
+<?php
+include __DIR__ . "/function.php";
+
+$result = '';
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['userEmail'])) {
+    // Email validation
+    $result = validateEmail($_GET['userEmail']);
+    
+    // Reset the email field
+    $_GET['userEmail'] = '';
+}
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -18,25 +33,23 @@
             crossorigin="anonymous"
         />
     </head>
-
-    <body>
-    <body>
-    <div class="container my-5">
-        <h1>Subscribe to our newsletter</h1>
-        <form>
-            <div class="mb-3">
-            <input type="text" class="form-control" id="userEmail" name="userEmail" value="<?php isset($_GET['user-email']) ? $_GET['user-email'] : ''; ?>">
-
-            </div>
-            <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-    </div>
-    <?php include 'function.php'; ?>
-
-
-
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
+<body>
+<div class="container my-5">
+    <h1>Subscribe to our newsletter</h1>
+    <form method="GET" action="index.php">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="userEmail" name="userEmail" value="<?= isset($_GET['userEmail']) ? $_GET['userEmail'] : '' ?>">
+            <?php if ($result): ?>
+                <div class="alert <?= strpos($result, "Invalid") !== false ? 'alert-danger' : 'alert-success' ?> mt-2" role="alert">
+                    <?= $result ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+</div>
+<!-- Bootstrap JavaScript Libraries -->
+<script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"
