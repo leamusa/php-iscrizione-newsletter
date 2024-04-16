@@ -1,10 +1,8 @@
-<?php 
 
-?>
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>NewsLetter</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -22,36 +20,18 @@
     </head>
 
     <body>
-        
-    
-    
-    
-    <header>
-            <!-- place navbar here -->
-        </header>
-        
-        
-        
-        
-        
-        
-        
-        <main>
+    <body>
+    <div class="container my-5">
+        <h1>Subscribe to our newsletter</h1>
+        <form>
+            <div class="mb-3">
+            <input type="text" class="form-control" id="userEmail" name="userEmail" value="<?php isset($_GET['user-email']) ? $_GET['user-email'] : ''; ?>">
 
-        </main>
-
-
-
-
-
-
-
-        <footer>
-            <!-- place footer here -->
-        </footer>
-
-
-
+            </div>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+    </div>
+    <?php include 'function.php'; ?>
 
 
 
